@@ -13,6 +13,7 @@ const app = {
         // Create and append the outlet
         const outlet = document.createElement('main');
         outlet.id = 'main';
+        outlet.classList.add('p-2', 'mt-5', 'text-center');
         appDiv.appendChild(outlet);
 
         // Initialize the router

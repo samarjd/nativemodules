@@ -4,21 +4,24 @@ import Router from './router.js';
 
 const app = {
     render() {
-        // Create and append the header
-        const header = new Header();
-        const renderedHeader = header.render();
-        const appDiv = document.getElementById('app');
-        appDiv.appendChild(renderedHeader);
 
-        // Create and append the outlet
+        // Create the main element to hold the app content
         const outlet = document.createElement('main');
         outlet.id = 'main';
         outlet.classList.add('p-2', 'mt-5', 'text-center');
-        appDiv.appendChild(outlet);
 
         // Initialize the router
         const router = new Router(outlet);
         router.init();
+
+        // Create and append the header
+        const header = new Header(router);
+        const renderedHeader = header.render();
+        const appDiv = document.getElementById('app');
+        appDiv.appendChild(renderedHeader);
+
+        // Append the main element to the app div
+        appDiv.appendChild(outlet);
 
         // Create and append the footer
         const footer = new Footer();

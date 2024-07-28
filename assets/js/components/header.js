@@ -1,5 +1,5 @@
 class Header {
-    constructor() {
+    constructor(router) {
         this.title = 'Native modules';
         this.navItems = {
             'Home': '',
@@ -12,13 +12,13 @@ class Header {
             },
             'Disabled': null
         };
-        
+        this.router = router; 
     }
 
     generateNavItem() {
         let navItemsHTML = '';
         Object.entries(this.navItems).forEach(([item, path]) => {
-            if (path === null) return; // Skip null values
+            if (path === null) return;
 
             if (typeof path === 'string') {
                 navItemsHTML += `
@@ -53,6 +53,21 @@ class Header {
         return navItemsHTML;
     }
 
+    handleFormSubmit(event) {
+        event.preventDefault();
+        const searchInput = event.target.querySelector('input[type="search"]');
+        const query = searchInput.value.trim();
+
+        if (query) {
+            const url = new URL(window.location.href);
+            history.pushState(null, '', query);
+            this.router.route();
+        }else{
+            history.pushState(null, '', '/');
+            this.router.route();
+        }
+    }
+
     render() {
         const headerElement = document.createElement('header');
         const headerNav = this.generateNavItem();
@@ -78,6 +93,9 @@ class Header {
         `;
 
         headerElement.innerHTML = headerHTML;
+        const form = headerElement.querySelector('form');
+        form.addEventListener('submit', this.handleFormSubmit.bind(this));
+
         return headerElement;
     }
 }

@@ -5,7 +5,6 @@ import Router from './router.js';
 const app = {
     render() {
 
-        // Create the main element to hold the app content
         const outlet = document.createElement('main');
         outlet.id = 'main';
         outlet.classList.add('p-2', 'mt-5', 'text-center');
@@ -30,5 +29,4 @@ const app = {
     }
 };
 
-// Export the app module, with rendering executed during import
 export default app;

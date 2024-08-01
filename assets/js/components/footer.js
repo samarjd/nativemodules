@@ -25,10 +25,10 @@ class Footer {
         let navItemsHTML = '';
 
         Object.entries(this.navItems).forEach(([item, path]) => {
-            if (path === null) return; // Skip null values
+            if (path === null) return;
 
             navItemsHTML += `
-                <li class="col-4">
+                <li class="col-3">
                     <a class="text-decoration-none" href="/${path}">
                         ${item}
                     </a>
@@ -45,10 +45,11 @@ class Footer {
 
         const footerHTML = `
             <div class="mt-5 p-2">
-                <div class="container-fluid">
+                <div class="container">
                     <ul class="row m-auto list-inline">
                         ${footerNav}
                     </ul>
+                    <p class="text-center mt-3">© All rights reserved</p>
                 </div>
             </div>
         `;

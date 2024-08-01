@@ -21,7 +21,6 @@ class Router {
 
     init() {
         window.addEventListener('popstate', () => this.route());
-        //window.addEventListener('load', () => this.route());
         document.body.addEventListener('click', (event) => {
             const anchor = event.target.closest('a');
             if (anchor && anchor.href.startsWith(window.location.origin)) {

@@ -31,4 +31,4 @@ const app = {
 };
 
 // Export the app module, with rendering executed during import
-export default app.render();
+export default app;

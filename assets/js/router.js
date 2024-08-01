@@ -7,20 +7,21 @@ class Router {
             '/contact': () => import('./views/contact.js'),
         };
 
-        // Define a default route for unknown paths
-        this.notFoundRoute = () => Promise.resolve({ default: () => {
-            const element = document.createElement('div');
-            element.innerHTML = `
-                <h1>404: Page Not Found</h1>
-                <p>Sorry, the page you are looking for does not exist.</p>
-            `;
-            return element;
-        }});
+        this.notFoundRoute = () => Promise.resolve({
+            default: () => {
+                const element = document.createElement('div');
+                element.innerHTML = `
+            <h1>404: Page Not Found</h1>
+            <p>Sorry, the page you are looking for does not exist.</p>
+          `;
+                return element;
+            }
+        });
     }
 
     init() {
         window.addEventListener('popstate', () => this.route());
-        window.addEventListener('load', () => this.route()); // Handle page load
+        //window.addEventListener('load', () => this.route());
         document.body.addEventListener('click', (event) => {
             const anchor = event.target.closest('a');
             if (anchor && anchor.href.startsWith(window.location.origin)) {
@@ -38,8 +39,8 @@ class Router {
 
         try {
             const { default: render } = await loadRoute();
-            this.outlet.innerHTML = ''; // Clear the outlet
-            this.outlet.appendChild(render());
+            this.outlet.innerHTML = '';
+            this.outlet.appendChild(await render());
         } catch (error) {
             console.error('Error loading route:', error);
             this.outlet.innerHTML = 'Error loading route.';

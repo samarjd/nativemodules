@@ -1,4 +1,4 @@
-import * as config from '../../../config.js';  // Ensure the correct relative path is used
+import * as config from '../../../config.js';
 
 export default async function renderHome() {
     const homeSection = document.createElement('section');
@@ -70,16 +70,14 @@ export default async function renderHome() {
         }
     }
 
-    // Initial fetch with default title
+    // Initial fetch with default value
     await fetchAndRenderCards('2022');
 
-    // Add event listener for search input
     searchInput.addEventListener('input', (event) => {
         const query = event.target.value.trim();
         if (query) {
             fetchAndRenderCards(query);
         } else {
-            // Clear the cards if the search input is empty
             cardDeck.innerHTML = '';
             loadingMessage.textContent = 'Please enter a search term.';
         }

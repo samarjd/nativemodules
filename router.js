@@ -2,9 +2,9 @@ class Router {
     constructor(outlet) {
         this.outlet = outlet;
         this.routes = {
-            '/': () => import('./views/home.js'),
-            '/about': () => import('./views/about.js'),
-            '/contact': () => import('./views/contact.js'),
+            '/': () => import('./src/views/home.js'),
+            '/about': () => import('./src/views/about.js'),
+            '/contact': () => import('./src/views/contact.js'),
         };
 
         this.notFoundRoute = () => Promise.resolve({
@@ -32,18 +32,23 @@ class Router {
         this.route();
     }
 
-    async route() {
+    route() {
         const path = window.location.pathname;
         const loadRoute = this.routes[path] || this.notFoundRoute;
 
-        try {
-            const { default: render } = await loadRoute();
-            this.outlet.innerHTML = '';
-            this.outlet.appendChild(await render());
-        } catch (error) {
-            console.error('Error loading route:', error);
-            this.outlet.innerHTML = 'Error loading route.';
-        }
+        loadRoute()
+            .then(module => {
+                const { default: render } = module;
+                this.outlet.innerHTML = '';
+                return render();
+            })
+            .then(renderedElement => {
+                this.outlet.appendChild(renderedElement);
+            })
+            .catch(error => {
+                console.error('Error loading route:', error);
+                this.outlet.innerHTML = 'Error loading route.';
+            });
     }
 }
 

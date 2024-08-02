@@ -1,5 +1,5 @@
-import Header from './components/header.js';
-import Footer from './components/footer.js';
+import Header from './src/components/header.js';
+import Footer from './src/components/footer.js';
 import Router from './router.js';
 
 const app = {

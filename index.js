@@ -1,3 +1,3 @@
-import app from './assets/js/app.js';
+import app from './app.js';
 
 app.render();

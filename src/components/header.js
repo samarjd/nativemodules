@@ -12,7 +12,7 @@ class Header {
             },
             'Disabled': null
         };
-        this.router = router; 
+        this.router = router;
     }
 
     generateNavItem() {
@@ -62,7 +62,7 @@ class Header {
             const url = new URL(window.location.href);
             history.pushState(null, '', query);
             this.router.route();
-        }else{
+        } else {
             history.pushState(null, '', '/');
             this.router.route();
         }

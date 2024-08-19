@@ -3,13 +3,14 @@ class Router {
         this.outlet = outlet;
         this.routes = {
             '/': () => import('./src/views/home.js'),
-            '/about': () => import('./src/views/about.js'),
-            '/contact': () => import('./src/views/contact.js'),
+            '/users': () => import('./src/views/users.js'),
+            '/newUser': () => import('./src/views/newUser.js'),
         };
 
         this.notFoundRoute = () => Promise.resolve({
             default: () => {
                 const element = document.createElement('div');
+                element.classList.add('container', 'mt-5', 'text-center');
                 element.innerHTML = `
             <h1>404: Page Not Found</h1>
             <p>Sorry, the page you are looking for does not exist.</p>

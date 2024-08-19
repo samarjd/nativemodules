@@ -3,8 +3,8 @@ class Header {
         this.title = 'Native modules';
         this.navItems = {
             'Home': '',
-            'About': 'about',
-            'Contact': 'contact',
+            'Users List': 'users',
+            'New User': 'newUser',
             'Dropdown': {
                 'Action': 'action',
                 'Another action': 'another-action',

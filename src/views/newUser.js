@@ -34,7 +34,7 @@ class UserForm extends HTMLElement {
         // Create the form HTML
         const formHtml = `
             <div class="container p-4">
-                <h2 class="mb-4">Add New User</h2>
+                <h2 class="">Add New User</h2>
                 <form class="row g-3" id="newUserForm">
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Email</label>
@@ -93,14 +93,11 @@ class UserForm extends HTMLElement {
     
         submitUserForm(formData)
         .then(result => {
-            const resultDiv = document.createElement("div");
-
             if (result.status === "success") {
-                resultDiv.textContent = "User added successfully!";
+                alert("User added successfully!");
             } else {
-                resultDiv.textContent = "Error adding user: " + result.message;
+                alert("Error adding user: " + result.message);
             }
-            form.prepend(resultDiv);
         })
         .catch(error => {
             const resultDiv = document.createElement("div");

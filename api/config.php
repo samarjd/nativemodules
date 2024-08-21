@@ -1,6 +1,6 @@
 <?php
 // Database configuration
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'test');
-define('DB_USER', 'root');
-define('DB_PASSWORD', '');
+const DB_HOST = 'localhost';
+const DB_NAME = 'test';
+const DB_USER = 'root';
+const DB_PASSWORD = '';

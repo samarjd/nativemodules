@@ -1,24 +1,27 @@
 class Router {
     constructor(outlet) {
         this.outlet = outlet;
+        
+        // Define the route mapping
         this.routes = {
-            "/": () => import("./src/views/home.js"),
-            "/users": () => import("./src/views/users.js"),
-            "/newUser": () => import("./src/views/newUser.js"),
+            "/": "home",
+            "/modules/index.html": "home",
+            "/users": "users",
+            "/newUser": "newUser",
+            "/sitemap": "sitemap",
+        };
+        
+        // Define the route handlers
+        this.routeHandlers = {
+            "home": () => import("./src/views/home.js"),
+            "users": () => import("./src/views/users.js"),
+            "newUser": () => import("./src/views/newUser.js"),
+            "sitemap": () => import("./src/views/sitemap.js"),
         };
 
-        this.notFoundRoute = () =>
-            Promise.resolve({
-                default: () => {
-                    const element = document.createElement("div");
-                    element.classList.add("container", "mt-5", "text-center");
-                    element.innerHTML = `
-                        <h1>404: Page Not Found</h1>
-                        <p>Sorry, the page you are looking for does not exist.</p>
-                    `;
-                    return element;
-                },
-            });
+        // Define the 404 handler
+        this.notFoundRoute = () => import("./src/views/404-page.js");
+
     }
 
     init() {
@@ -36,19 +39,23 @@ class Router {
 
     route() {
         const path = window.location.pathname;
-        const loadRoute = this.routes[path] || this.notFoundRoute;
+        const routeKey = this.routes[path] || "notFound";
+        const loadRoute = this.routeHandlers[routeKey] || this.notFoundRoute;
 
         loadRoute()
             .then((module) => {
                 const { default: render } = module;
-                this.outlet.innerHTML = "";
                 const renderedElement = new render();
 
-                if (renderedElement instanceof HTMLElement) {
-                    this.outlet.appendChild(renderedElement);
-                } else {
-                    console.error("Error: Rendered element is not a valid HTML element.");
+                this.outlet.innerHTML = "";
+                this.outlet.appendChild(renderedElement);
+                
+                // Call the connectedCallback method if it exists
+                if (typeof renderedElement.connectedCallback === "function") {
+                    renderedElement.connectedCallback();
                 }
+                
+                window.scrollTo({ top: 0, behavior: "smooth" });
             })
             .catch((error) => {
                 console.error("Error loading route:", error);

@@ -31,13 +31,16 @@ class UserTable extends HTMLElement {
             linkElement.setAttribute('href', `${config.CLIENT_URL}/src/css/user-table.css`);
 
             const container = document.createElement('section');
-            container.classList.add('container', 'mt-5');
+            container.classList.add('container');
 
             if (userData.status === 'success') {
                 if (userData.data.length === 0) {
                     container.innerHTML += '<p class="text-center">No users found.</p>';
                 } else {
                     const userTable = this.createUserTable(userData.data);
+                    const heading = document.createElement('h2');
+                    heading.textContent = 'Users List: ' + userData.data.length + ' users found';
+                    container.appendChild(heading);
                     container.appendChild(userTable);
                 }
             } else {

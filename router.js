@@ -13,9 +13,9 @@ class Router {
                     const element = document.createElement("div");
                     element.classList.add("container", "mt-5", "text-center");
                     element.innerHTML = `
-            <h1>404: Page Not Found</h1>
-            <p>Sorry, the page you are looking for does not exist.</p>
-          `;
+                        <h1>404: Page Not Found</h1>
+                        <p>Sorry, the page you are looking for does not exist.</p>
+                    `;
                     return element;
                 },
             });
@@ -42,10 +42,13 @@ class Router {
             .then((module) => {
                 const { default: render } = module;
                 this.outlet.innerHTML = "";
-                return render();
-            })
-            .then((renderedElement) => {
-                this.outlet.appendChild(renderedElement);
+                const renderedElement = new render();
+
+                if (renderedElement instanceof HTMLElement) {
+                    this.outlet.appendChild(renderedElement);
+                } else {
+                    console.error("Error: Rendered element is not a valid HTML element.");
+                }
             })
             .catch((error) => {
                 console.error("Error loading route:", error);

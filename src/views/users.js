@@ -20,10 +20,6 @@ class UserTable extends HTMLElement {
         this.attachShadow({ mode: 'open' });
     }
 
-    connectedCallback() {
-        this.render();
-    }
-
     render() {
         fetchUsers().then(userData => {
             const linkElement = document.createElement('link');

@@ -21,10 +21,6 @@ class UserForm extends HTMLElement {
         this.attachShadow({ mode: 'open' });
     }
 
-    connectedCallback() {
-        this.render();
-    }
-
     render() {
         // Apply external stylesheet for the component
         const linkElement = document.createElement('link');

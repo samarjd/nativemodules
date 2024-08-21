@@ -50,11 +50,6 @@ class Router {
                 this.outlet.innerHTML = "";
                 this.outlet.appendChild(renderedElement);
                 
-                // Call the connectedCallback method if it exists
-                if (typeof renderedElement.connectedCallback === "function") {
-                    renderedElement.connectedCallback();
-                }
-                
                 window.scrollTo({ top: 0, behavior: "smooth" });
             })
             .catch((error) => {

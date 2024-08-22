@@ -7,6 +7,10 @@ class SitemapGenerator extends HTMLElement {
         this.render();
     }
 
+    connectedCallback() {
+        this.render();
+    }
+
     // Generate the XML sitemap
     generateSitemap() {
         const baseUrl = 'http://localhost/modules';

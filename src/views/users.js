@@ -14,10 +14,15 @@ function fetchUsers() {
         throw error;
     });
 }
+
 class UserTable extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
+    }
+
+    connectedCallback() {
+        this.render();
     }
 
     render() {

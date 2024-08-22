@@ -41,11 +41,13 @@ class Router {
         const path = window.location.pathname;
         const routeKey = this.routes[path] || "notFound";
         const loadRoute = this.routeHandlers[routeKey] || this.notFoundRoute;
-
+        
         loadRoute()
             .then((module) => {
                 const { default: render } = module;
                 const renderedElement = new render();
+                console.log("Routing to", path, "with routeKey", routeKey, "and loading route", loadRoute);
+                console.log("Rendered element", renderedElement);
 
                 this.outlet.innerHTML = "";
                 this.outlet.appendChild(renderedElement);

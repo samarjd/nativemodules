@@ -20,6 +20,10 @@ class UserForm extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
     }
+    
+    connectedCallback() {
+        this.render();
+    }
 
     render() {
         // Apply external stylesheet for the component

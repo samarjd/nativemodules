@@ -7,7 +7,7 @@ const app = {
 
         const outlet = document.createElement('main');
         outlet.id = 'main';
-        outlet.classList.add('p-2', 'my-2');
+        outlet.classList.add('px-2', 'py-5', 'mb-2', 'mt-5');
 
         // Initialize the router
         const router = new Router(outlet);

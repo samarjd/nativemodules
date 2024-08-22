@@ -4,6 +4,10 @@ class NotFoundPage extends HTMLElement {
         this.attachShadow({ mode: 'open' });
         this.render();
     }
+    
+    connectedCallback() {
+        this.render();
+    }
 
     render() {
         this.shadowRoot.innerHTML = `

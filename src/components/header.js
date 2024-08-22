@@ -1,6 +1,7 @@
 class Header {
     constructor(router) {
         this.title = 'Native modules';
+        this.logo = 'src/images/logo.png';
         this.navItems = {
             'Home': '',
             'Users List': 'users',
@@ -73,9 +74,12 @@ class Header {
         const headerNav = this.generateNavItem();
 
         const headerHTML = `
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">${this.title}</a>
+                    <a class="navbar-brand" href="/">
+                        <img src="${this.logo}" alt="Logo" width="24" height="24" class="d-inline-block align-text-top rounded-5">
+                        ${this.title}
+                    </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -84,8 +88,8 @@ class Header {
                             ${headerNav}
                         </ul>
                         <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
+                            <input class="form-control-sm me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-sm btn-primary" type="submit">Search</button>
                         </form>
                     </div>
                 </div>

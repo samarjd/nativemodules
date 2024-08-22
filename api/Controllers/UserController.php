@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 require_once __DIR__ . '/../database/Database.php';
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../config.php';
 
 use App\Database\Database;
@@ -12,7 +12,6 @@ use \Firebase\JWT\Key;
 
 class UserController
 {
-
     protected $db;
     private $jwtSecret = JWT_SECRET;
 
@@ -40,7 +39,9 @@ class UserController
             'read' => $id ? $this->read($id) : $errorAction,
             'update' => $id ? $this->update($id, $data) : $errorAction,
             'delete' => $id ? $this->delete($id) : $errorAction,
-            'list' => $this->listUsers(),
+            'list' => $this->list(),
+            'login' => $this->login($data['email'], $data['password']),
+            'logout' => $this->logout($data),
             default => array_merge($errorCreation, ["data" => $data]),
         };
 
@@ -122,7 +123,7 @@ class UserController
         }
     }
 
-    public function listUsers(): array
+    public function list(): array
     {
         // Fetch all users
         $sql = "SELECT * FROM users";
@@ -161,7 +162,7 @@ class UserController
             return ['status' => 'error', 'message' => 'Invalid credentials'];
         }
     }
-
+    
     public function logout(array $data): array
     {
         try {

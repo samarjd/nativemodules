@@ -19,6 +19,10 @@ class HomePage extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
     }
+    
+    connectedCallback() {
+        this.render();
+    }
 
     render() {
         const linkElement = document.createElement('link');

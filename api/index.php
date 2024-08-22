@@ -1,25 +1,25 @@
 <?php
 
-$route = isset($_GET['route']) ? $_GET['route'] : '';
+$route = $_GET['route'] ?? '';
 
-$routes = array(
+$routes = [
   'user' => 'App\Controllers\UserController',
   'product' => 'App\Controllers\ProductController',
   'order' => 'App\Controllers\OrderController'
-);
+];
 
 if (array_key_exists($route, $routes)) {
   try {
     $controller = $routes[$route];
     $controllerFile = __DIR__ . '/controllers/' . basename(str_replace('App\\Controllers\\', '', $controller)) . '.php';
 
-    require_once($controllerFile);
+    require_once $controllerFile;
     $controllerInstance = new $controller();
     $controllerInstance->handle($_POST);
   } catch (Exception $e) {
-    $output = array(
+    $output = [
       'error' => $e->getMessage()
-    );
+    ];
     echo json_encode($output);
   }
 } else {

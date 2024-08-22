@@ -33,4 +33,4 @@ credentials.json
 *.swp
 
 # Ignore vendor directories
-/vendor/
+vendor/*
